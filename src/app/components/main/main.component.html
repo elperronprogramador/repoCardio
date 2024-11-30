@@ -1,0 +1,182 @@
+<!-- ------------------------------------------------ -->
+
+<nav
+  class="navbar navbar-expand-lg navbar-light"
+  style="background-color: #cce7e8"
+>
+  <a
+    class="navbar-brand"
+    href="#"
+    style="
+      font-family: 'Arial Black', sans-serif;
+      text-transform: uppercase;
+      color: #1e4955;
+    "
+  >
+    CardioTest
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="color: #1e4955">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="color: #1e4955">Sobre Nosotros</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="color: #1e4955">Contacto</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div
+  class="container-fluid"
+  style="
+    background: url('https://bienestarips.com/wp-content/uploads/2023/10/Banner-Bienestar_Mesa-de-trabajo-1-scaled.jpg')
+      no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+  "
+>
+  <div
+    class="container d-flex justify-content-center align-items-center"
+    style="height: 100%"
+  >
+    <div class="card shadow-lg w-50">
+      <div class="card-header text-center">
+        <img
+          src="https://www.cmvidasanclemente.cl/wp-content/uploads/2024/03/banner-medicina-general-ficha-1.jpg"
+          alt="Entorno Médico"
+          class="img-fluid mb-3"
+          style="max-height: 150px"
+        />
+        <h2 class="mb-0" style="color: #1e4955">
+          Test de Riesgo Cardiovascular
+        </h2>
+      </div>
+      <div class="card-body">
+        <form (submit)="guardarDatos()">
+          <!-- Fecha del Test -->
+          <div class="form-group">
+            <label for="fechaTest">Fecha del Test</label>
+            <input
+              type="date"
+              class="form-control"
+              id="fechaTest"
+              [(ngModel)]="fechaNacimiento"
+              name="fechaTest"
+              (ngModelChange)="calcularEdad()"
+              required
+            />
+            <div
+              *ngIf="fechaNacimiento && !mensajeErrorFecha"
+              class="text-success"
+            >
+              ¡Fecha seleccionada correctamente!
+            </div>
+            <div
+              *ngIf="!fechaNacimiento && mensajeErrorFecha"
+              class="text-danger"
+            >
+              Por favor, ingrese una fecha válida.
+            </div>
+          </div>
+
+          <!-- Edad -->
+          <div class="form-group">
+            <label for="edad">Edad</label>
+            <input
+              type="text"
+              class="form-control"
+              id="edad"
+              [(ngModel)]="edadCalculada"
+              readonly
+            />
+          </div>
+
+          <!-- Programa Académico -->
+          <div class="col-8">
+            <label class="form-label" for="programaAcademico"
+              >Programa Académico:</label
+            >
+            <select
+              class="form-control"
+              id="programaAcademico"
+              [(ngModel)]="programaAcademico"
+              name="programaAcademico"
+              (ngModelChange)="validarCampos()"
+              required
+            >
+              <option value="" disabled selected>
+                Seleccione su programa académico
+              </option>
+              <option
+                *ngFor="let programa of programasValidos"
+                [value]="programa"
+              >
+                {{ programa }}
+              </option>
+            </select>
+            <div
+              *ngIf="programaAcademico && !mensajeErrorPrograma"
+              class="text-success"
+            >
+              ¡Programa seleccionado correctamente!
+            </div>
+            <div
+              *ngIf="!programaAcademico && mensajeErrorPrograma"
+              class="text-danger"
+            >
+              Por favor, seleccione un programa académico.
+            </div>
+          </div>
+
+          <!-- Sexo -->
+          <div class="form-group">
+            <label for="sexo">Sexo</label>
+            <select
+              class="form-control"
+              id="sexo"
+              [(ngModel)]="descripcionSexo"
+              name="sexo"
+              (ngModelChange)="validarCampos()"
+              required
+            >
+              <option value="" disabled selected>Seleccione su sexo</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+              <option value="No Binario">No Binario</option>
+            </select>
+            <div
+              *ngIf="descripcionSexo && !mensajeErrorSexo"
+              class="text-success"
+            >
+              ¡Sexo seleccionado correctamente!
+            </div>
+            <div
+              *ngIf="!descripcionSexo && mensajeErrorSexo"
+              class="text-danger"
+            >
+              Por favor, seleccione un sexo.
+            </div>
+          </div>
+
+          <!-- Botón de enviar -->
+          <button type="submit" class="btn btn-primary">Calcular Riesgo</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
