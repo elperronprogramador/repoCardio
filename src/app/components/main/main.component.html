@@ -102,8 +102,13 @@
               class="form-control"
               id="edad"
               [(ngModel)]="edadCalculada"
-              readonly
+              [readonly]="edadCalculada < ANIOS_MINIMO"
+              [attr.min]="ANIOS_MINIMO"
+              (input)="validarEdad($event)"
             />
+            <div *ngIf="mensajeErrorFecha" class="alert alert-danger">
+              {{ mensajeErrorFecha }}
+            </div>
           </div>
 
           <!-- Programa Académico -->

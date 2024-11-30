@@ -31,6 +31,7 @@ export class MainComponent {
     'Ciencias de la Computación',
   ];
 
+  // Calcular edad a partir de la fecha de nacimiento
   calcularEdad(): void {
     if (!this.fechaNacimiento) {
       this.mensajeErrorFecha =
@@ -58,6 +59,16 @@ export class MainComponent {
 
     this.edadCalculada = edad;
     this.mensajeErrorFecha = '';
+  }
+  // Validar si la edad es mayor o igual a 15
+  validarEdad(event: any): void {
+    const valor = event.target.value;
+    if (valor && (isNaN(valor) || valor < this.ANIOS_MINIMO)) {
+      this.edadCalculada = 0;
+      this.mensajeErrorFecha = `Debe tener al menos ${this.ANIOS_MINIMO} años para ingresar la edad.`;
+    } else {
+      this.mensajeErrorFecha = '';
+    }
   }
 
   validarCampos(): void {
