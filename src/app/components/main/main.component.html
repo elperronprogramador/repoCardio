@@ -78,6 +78,7 @@
               [(ngModel)]="fechaNacimiento"
               name="fechaTest"
               (ngModelChange)="calcularEdad()"
+              (change)="calcularEdad()"
               required
             />
             <div
@@ -101,10 +102,8 @@
               type="text"
               class="form-control"
               id="edad"
-              [(ngModel)]="edadCalculada"
-              [readonly]="edadCalculada < ANIOS_MINIMO"
-              [attr.min]="ANIOS_MINIMO"
-              (input)="validarEdad($event)"
+              [value]="edadCalculada"
+              [readonly]="true"
             />
             <div *ngIf="mensajeErrorFecha" class="alert alert-danger">
               {{ mensajeErrorFecha }}
